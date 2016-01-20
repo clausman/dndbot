@@ -78,16 +78,36 @@ controller.hears(['uptime', 'identify yourself', 'who are you', 'what is your na
 
 });
 
-controller.hears(['roll'], 'direct_message,direct_mention,mention', function(bot, message) {
-  var rollText = message.text.replace('roll ', '');
-  console.log(rollText);
+function handleRoll(rollText) {
   var valid = dice.validate(rollText);
   if (!valid) {
-    bot.reply(message, util.format('"%s" is not a valid roll!', rollText));
+    return util.format('"%s" is not a valid roll!', rollText);
   } else {
     var roll = dice.roll(rollText);
     console.log('%s resulted in %s', rollText, util.inspect(roll, false, null));
-    bot.reply(message, ''+roll.result);
+    return ''+roll.result;
+  }
+}
+
+controller.hears(['roll'], 'direct_message,direct_mention,mention', function(bot, message) {
+  var rollText = message.text.replace('roll ', '');
+  var response = handleRoll(rollText);
+  bot.reply(message, response);
+});
+
+// Setup slash commands
+controller.setupWebserver(process.env.port,function(err,express_webserver) {
+  controller.createWebhookEndpoints(express_webserver)
+});
+
+controller.on('slash_command',function(bot,message) {
+  switch (message.command) {
+    case '/roll':
+      bot.replyPublic(message, handleRoll(message.text));
+      break;
+    case '/sroll':
+      bot.replyPrivate(message, handleRoll(message.text));
+      break;
   }
 });
 
