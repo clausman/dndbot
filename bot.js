@@ -90,7 +90,7 @@ function handleRoll(rollText) {
 }
 
 controller.hears(['roll'], 'direct_message,direct_mention,mention', function(bot, message) {
-  var rollText = message.text.replace('roll ', '');
+  var rollText = message.text.replace(/^roll /, '');
   var response = handleRoll(rollText);
   bot.reply(message, response);
 
@@ -106,10 +106,10 @@ controller.setupWebserver(process.env.port,function(err,express_webserver) {
 controller.on('slash_command',function(bot,message) {
   switch (message.command) {
     case '/roll':
-      bot.replyPublic(message, handleRoll(message.text));
+      bot.replyPublic(message, handleRoll(message.text.replace(/^[/]/, '')));
       break;
     case '/sroll':
-      bot.replyPrivate(message, handleRoll(message.text));
+      bot.replyPrivate(message, handleRoll(message.text.replace(/^[/]/, '')));
       break;
   }
 });
