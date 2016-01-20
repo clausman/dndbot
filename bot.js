@@ -62,7 +62,7 @@ var Roll = require('roll'),
 var util = require('util');
 
 var controller = Botkit.slackbot({
-  debug: true,
+  debug: false,
 });
 
 var bot = controller.spawn({
