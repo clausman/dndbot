@@ -1,0 +1,15 @@
+{
+  "name": "dndbot",
+  "version": "1.0.0",
+  "description": "Slack bot providing tools for playing dungeons and dragons or other tabletop rpgs",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joshua Clausman",
+  "license": "ISC",
+  "dependencies": {
+    "botkit": "0.0.5",
+    "roll": "^1.1.0"
+  }
+}
