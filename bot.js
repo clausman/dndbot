@@ -93,6 +93,9 @@ controller.hears(['roll'], 'direct_message,direct_mention,mention', function(bot
   var rollText = message.text.replace('roll ', '');
   var response = handleRoll(rollText);
   bot.reply(message, response);
+
+  // HACK Save the team into storage, it is required to be there for slash_command
+  controller.storage.teams.save({id: message.team});
 });
 
 // Setup slash commands
