@@ -50,8 +50,8 @@
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 
-if (!process.env.token) {
-  console.log('Error: Specify token in environment');
+if (!(process.env.token && process.env.port && process.env.team_id)) {
+  console.log('Error: Specify token, port and team_id in environment');
   process.exit(1);
 }
 
@@ -94,11 +94,11 @@ controller.hears(['roll'], 'direct_message,direct_mention,mention', function(bot
   var response = handleRoll(rollText);
   bot.reply(message, response);
 
-  // HACK Save the team into storage, it is required to be there for slash_command
-  controller.storage.teams.save({id: message.team});
 });
 
 // Setup slash commands
+// HACK The team must have been saved before a slash_command is received, so we bind to a single team for now
+controller.storage.teams.save({id: process.env.team_id}, function() {});
 controller.setupWebserver(process.env.port,function(err,express_webserver) {
   controller.createWebhookEndpoints(express_webserver)
 });
