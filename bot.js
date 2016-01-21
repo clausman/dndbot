@@ -85,7 +85,11 @@ function handleRoll(rollText) {
   } else {
     var roll = dice.roll(rollText);
     console.log('%s resulted in %s', rollText, util.inspect(roll, false, null));
-    return ''+roll.result;
+    var response = ''+roll.result;
+    if (typeof(roll.rolled) !== 'number') {
+      response += '  -  ' + JSON.stringify(roll.rolled);
+    }
+    return response;
   }
 }
 
