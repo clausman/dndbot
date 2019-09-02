@@ -1,3 +1,4 @@
+# Tutorial followed: https://www.jamestharpe.com/serverless-typescript-getting-started/
 service:
   name: dndbot
 #app: your-app-name
