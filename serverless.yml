@@ -1,8 +1,8 @@
 # Tutorial followed: https://www.jamestharpe.com/serverless-typescript-getting-started/
 service:
   name: dndbot
-#app: your-app-name
-#tenant: your-tenant-name
+app: dndbot
+org: jclausman
 
 # Add the serverless-webpack plugin
 plugins:
@@ -11,11 +11,20 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
+  environment:
+    SLACK_TOKEN_ROLL_COMMAND: ${file(./secrets.yml):dev.SLACK_TOKEN_ROLL_COMMAND}
+    SLACK_TOKEN_SROLL_COMMAND: ${file(./secrets.yml):dev.SLACK_TOKEN_SROLL_COMMAND}
 
 functions:
-  hello:
-    handler: handler.hello
+  roll:
+    handler: handler.roll
     events:
       - http:
           method: get
-          path: hello
+          path: roll
+  webhook:
+    handler: handler.webhook
+    events:
+      - http:
+          method: post
+          path: webhook
