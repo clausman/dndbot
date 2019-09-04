@@ -1,17 +1,16 @@
 # dndbot
 This is slackbot for tabletop rpg management in slack, specifically designed for d&d. 
-It uses botkit and it modelled after their kit.
 
 It currently features the following functionality:
 
- * Die rolls
+ * Die rolls via slash commands
 
 
 ## Running
 
-[Create two new slash commands](https://api.slack.com/slash-commands#creating_commands), /roll and /sroll, in your Slack.
+Create two [new slash commands](https://api.slack.com/slash-commands#creating_commands), /roll and /sroll, in your Slack.
 
-Copy the file secrets.sample.yml to secrets.yml and update it with the slash command tokens.
+Copy the file [secrets.sample.yml] to `secrets.yml` and update it with the slash command tokens.
 
 Setup [serverless](https://serverless.com/framework/docs/getting-started/) and [configure AWS credentials](https://serverless.com/framework/docs/providers/aws/cli-reference/config-credentials/).
 
