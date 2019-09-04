@@ -1,51 +1,36 @@
 # dndbot
 This is slackbot for tabletop rpg management in slack, specifically designed for d&d. 
-It uses botkit and it modelled after their kit.
 
 It currently features the following functionality:
 
- * Die rolls
+ * Die rolls via slash commands
 
 
 ## Running
 
-Get a Bot token from Slack: http://my.slack.com/services/new/bot
+Create two [new slash commands](https://api.slack.com/slash-commands#creating_commands), /roll and /sroll, in your Slack.
 
-Run your bot from the command line:
+Copy the file [secrets.sample.yml](./secrets.sample.yml) to `secrets.yml` and update it with the slash command tokens.
 
-    team_id=<TEAM ID> port=<PORT> token=<MY TOKEN> node bot.js
+Setup [serverless](https://serverless.com/framework/docs/getting-started/) and [configure AWS credentials](https://serverless.com/framework/docs/providers/aws/cli-reference/config-credentials/).
 
-MY TOKEN - token for slack bot integration
-PORT - the port to bind to for slash command support
-TEAM ID - the id of your slack team
+Run `serverless deploy -v` to deploy the bot.
+
+Update the slash commands created above with the ServiceEndpoint for your bot.
 
 ## Use in Slack
 
-Find your bot inside Slack to send it a direct message.
-
-Say: "roll 1d6"
-
-The bot will reply with the value of the die
-
-Say: "roll 1d8+2d6+3"
-
-The bot will reply with the value of the die
-
-You can also setup Slack slash commands. Botkit automatically binds to /slack/reveive on the port you specify. 
-To support slash command, you will need manually create the slash integration for your slack team, and point them at the correct url on the server hosting this bot.
 Currently available slash commands are
 
   * /roll - rolls some dice publically
   * /sroll - rolls some dice secret to you
 
-Make sure to invite your bot into other channels using /invite @<my bot>!
+Some examples:
+
+/roll 1d6
+
+/sroll 1d8+2d6+3
 
 ### Valid roll text
 
-Rolling is resolved using the npm library roll, see its docs for more valid roll strings
-
-## Extending
-
-Botkit is has many features for building cool and useful bots!
-
-Read all about it here: http://howdy.ai/botkit
+Rolling is resolved using the [node-roll library](https://github.com/troygoode/node-roll), see its docs for more valid roll strings

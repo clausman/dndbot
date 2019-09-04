@@ -1,7 +1,12 @@
-# Node
+# package directories
 node_modules
+jspm_packages
 
+# Serverless directories
+.serverless
 
-# IDE Files
-*.iml
-.idea
+# Webpack directories
+.webpack
+
+# Project specific
+secrets.yml

@@ -1,15 +1,31 @@
 {
   "name": "dndbot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Slack bot providing tools for playing dungeons and dragons or other tabletop rpgs",
-  "main": "bot.js",
+  "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r ts-node/register ./**/*.spec.ts"
+  },
+  "dependencies": {
+    "querystring": "^0.2.0",
+    "roll": "^1.2.0",
+    "source-map-support": "^0.5.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "8.10.3",
+    "@types/chai": "^4.2.0",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "10.0.3",
+    "@types/sinon": "^7.0.13",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "serverless-webpack": "^5.2.0",
+    "sinon": "^7.4.1",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0"
   },
   "author": "Joshua Clausman",
-  "license": "ISC",
-  "dependencies": {
-    "botkit": "0.0.5",
-    "roll": "^1.1.0"
-  }
+  "license": "MIT"
 }
